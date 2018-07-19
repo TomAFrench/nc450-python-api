@@ -9,7 +9,7 @@ class NC450():
                 'GET_LED': 'ledgetting.fcgi','SET_LED': 'ledsetting.fcgi','GET_CLOUD': 'get_cloud.fcgi',
                 'GET_VIDEO': 'getvideosetting.fcgi', 'GET_OSD':'getosdandtimedisplay.fcgi',
                 'SET_OSD':'setosdandtimedisplay.fcgi', 'SET_TURN': 'setTurnDirection.fcgi',
-                'GET_MOTION': 'mdconf_get.fcgi',
+                'GET_MOTION': 'mdconf_get.fcgi', 'SET_MOTION': 'mdconf_set.fcgi',
                 'GET_WIFI_STATUS': 'wireless_status.fcgi', 'SCAN_WIFI': 'wireless_scan.fcgi',
                 'GET_WIFI': 'wireless_get.fcgi', 'SET_WIFI': 'wireless_set.fcgi',
                 'GET_ETHERNET': 'netconf_get.fcgi',  'SET_ETHERNET': 'netconf_set.fcgi',
@@ -20,7 +20,7 @@ class NC450():
                     'GET_LED': 'get','SET_LED': 'post',
                     'GET_CLOUD': 'get', 'GET_VIDEO': 'get',
                     'GET_OSD':'get', 'SET_OSD':'post',
-                    'SET_TURN': 'post', 'GET_MOTION': 'get',
+                    'SET_TURN': 'post', 'GET_MOTION': 'get', 'SET_MOTION': 'post',
                     'GET_WIFI_STATUS': 'get',
                     'SCAN_WIFI': 'post',  'GET_WIFI': 'get',
                     'SET_WIFI': 'post',
@@ -131,6 +131,15 @@ class NC450():
     def motion_detection(self):
         response = self.call('GET_MOTION')
         return response.json()
+
+    def set_md_status(self,status):
+        md_status = {'is_enable': status}
+        self.call('SET_MOTION', md_status)
+
+    def set_md_sensitivity(self,status):
+        # add value validation
+        md_status = {'precision': status}
+        self.call('SET_MOTION', md_status)
 
     #### LED ####
 
