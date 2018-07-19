@@ -15,7 +15,7 @@ source bin/activate
 pip3 install -r requirements.txt
 ```
 
-The API may then be import as any other python module.
+The API may then be imported as any other python module.
 
 
 ## Example
