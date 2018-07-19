@@ -99,6 +99,10 @@ class NC450():
         new_osd_text = {'osd_info': base64.b64encode(text.encode('utf-8'))}
         self.set_osd_options(new_osd_text)
 
+    def set_osd_text_color(self, color=16777215):
+        new_osd_text = {'osd_color': color}
+        self.set_osd_options(new_osd_text)
+
     #### Camera Motion ####
     def turn(self, direction, timestep = 8, operation = 'start'):
         if direction not in NC450.valid_directions:
