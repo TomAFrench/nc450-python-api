@@ -82,12 +82,22 @@ class NC450():
         response = self.call('GET_VIDEO')
         return response.json()
 
+    #### On-Screen Display ####
+
     def osd(self):
         response = self.call('GET_OSD')
         return response.json()
 
-    def set_osd(self, osd_data):
+    def set_osd_options(self, osd_data):
         self.call('SET_OSD', osd_data)
+
+    def set_osd_visibility(self, osd_state):
+        osd_data = {'osd_enable': osd_state}
+        self.set_osd_options(osd_data)
+
+    def set_osd_text(self, text):
+        new_osd_text = {'osd_info': base64.b64encode(text.encode('utf-8'))}
+        self.set_osd_options(new_osd_text)
 
     #### Camera Motion ####
     def turn(self, direction, timestep = 8, operation = 'start'):
