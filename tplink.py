@@ -33,7 +33,7 @@ class NC450():
     user_agent = r'Mozilla/4.0 (compatible; MSIE 5.5; Windows NT)'
     headers = {'User-Agent': user_agent, 'Accept': "text/plain"}
 
-    def __init__(self, url, username='admin', password=None):
+    def __init__(self, url, username='admin', password='admin'):
         self.url = url
         self.headers = NC450.headers
         self.params = {'Username': username, 'Password': base64.b64encode(password)}
