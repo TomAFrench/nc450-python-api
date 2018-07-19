@@ -11,6 +11,7 @@ This API can be installed in a python3 virtual environment by the commands:
 ```bash
 cd /path/to/repo
 python3 -m venv .
+source bin/activate
 pip3 install -r requirements.txt
 ```
 
