@@ -37,7 +37,6 @@ class NC450:
     def __init__(self, url, username="admin", password="admin"):
         self.url = url
         self.headers = NC450.headers
-        self.params = {"Username": username, "Password": base64.b64encode(password)}
         self.token = None
         self.session = requests.session()
 
@@ -57,8 +56,9 @@ class NC450:
 
     #### Basic functions ####
 
-    def login(self):
-        response = self.post("LOGIN", self.params)
+    def login(self, username="admin", password="admin"):
+        login_data = {"Username": username, "Password": base64.b64encode(password)}
+        response = self.post("LOGIN", login_data)
         print(response.json())
         self.token = response.json()["token"]
 
