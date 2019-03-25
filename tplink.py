@@ -75,7 +75,6 @@ class NC450:
 
     #### Video ####
 
-    # @property
     def video(self):
         response = self.get("GET_VIDEO")
         return response.json()
@@ -112,12 +111,10 @@ class NC450:
                 time.sleep(timestep)
                 self.turn(direction, timestep, "stop")
 
-    # @property
     def velocity(self):
         response = self.get("GET_PTZ")
         return response.json()
 
-    # @velocity.setter
     def set_velocity(self, velocity):
         if velocity not in [0, 1, 2]:
             raise ValueError("Attempting to set velocity to invalid value")
@@ -141,12 +138,10 @@ class NC450:
 
     #### LED ####
 
-    # @property
     def led_status(self):
         response = self.get("GET_LED")
         return response.json()
 
-    # @led_status.setter
     def set_led_status(self, status):
         if status not in [0, 1]:
             raise ValueError("Attempting to set led_status to invalid value")
@@ -163,24 +158,20 @@ class NC450:
         response = self.post("SCAN_WIFI")
         return response.json()
 
-    # @property
     def wifi_settings(self):
         response = self.get("GET_WIFI")
         return response.json()
 
-    # @wifi_settings.setter
     def set_wifi_settings(self, data):
         response = self.post("SET_WIFI", data)
         return response.json()
 
     #### Ethernet ####
 
-    # @property
     def ethernet_settings(self):
         response = self.get("GET_ETHERNET")
         return response.json()
 
-    # @ethernet_settings.setter
     def set_ethernet_settings(self, data):
         response = self.post("SET_ETHERNET", data)
         return response.json()
