@@ -117,7 +117,8 @@ class NC450:
         return response.json()
 
     def set_velocity(self, velocity):
-        if velocity not in [0, 1, 2]:
+        valid_velocities = [0, 1, 2]
+        if velocity not in valid_velocities:
             raise ValueError("Attempting to set velocity to invalid value")
         velocity_data = {"value": velocity}
         self.post(SET_PTZ, velocity_data)
