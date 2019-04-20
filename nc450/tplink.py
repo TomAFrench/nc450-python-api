@@ -60,19 +60,21 @@ class NC450:
     def login(self, username="admin", password="admin"):
         login_data = {"Username": username, "Password": base64.b64encode(password)}
         response = self.post(LOGIN, login_data)
-        print(response.json())
         self.token = response.json()["token"]
+        return response.json()
 
     def logout(self):
         response = self.post(LOGOUT)
         self.token = None
+        return response.json()
 
     def system_info(self):
         response = self.get(GET_SYSTEM_INFORMATION)
         return response.json()
 
     def reboot(self):
-        self.post(REBOOT, {"token": self.token})
+        response = self.post(REBOOT, {"token": self.token})
+        return response.json()
 
     #### Video ####
 
@@ -87,19 +89,22 @@ class NC450:
         return response.json()
 
     def set_osd_options(self, osd_data):
-        self.post(SET_OSD, data=osd_data)
+        return self.post(SET_OSD, data=osd_data)
 
     def set_osd_visibility(self, osd_state):
         osd_data = {"osd_enable": osd_state}
-        self.set_osd_options(osd_data)
+        response = self.set_osd_options(osd_data)
+        return response.json()
 
     def set_osd_text(self, text):
         new_osd_text = {"osd_info": base64.b64encode(text.encode("utf-8"))}
-        self.set_osd_options(new_osd_text)
+        response = self.set_osd_options(new_osd_text)
+        return response.json()
 
     def set_osd_text_color(self, color=16777215):
         new_osd_text = {"osd_color": color}
-        self.set_osd_options(new_osd_text)
+        response = self.set_osd_options(new_osd_text)
+        return response.json()
 
     #### Camera Motion ####
     def turn(self, direction, timestep=8, operation="start"):
@@ -121,7 +126,8 @@ class NC450:
         if velocity not in valid_velocities:
             raise ValueError("Attempting to set velocity to invalid value")
         velocity_data = {"value": velocity}
-        self.post(SET_PTZ, velocity_data)
+        response = self.post(SET_PTZ, velocity_data)
+        return response.json()
 
     #### Motion Detection ####
 
@@ -131,12 +137,14 @@ class NC450:
 
     def set_md_status(self, status):
         md_status = {"is_enable": status}
-        self.post(SET_MOTION, md_status)
+        response = self.post(SET_MOTION, md_status)
+        return response.json()
 
     def set_md_sensitivity(self, status):
         # add value validation
         md_status = {"precision": status}
-        self.post(SET_MOTION, md_status)
+        response = self.post(SET_MOTION, md_status)
+        return response.json()
 
     #### LED ####
 
@@ -149,6 +157,7 @@ class NC450:
             raise ValueError("Attempting to set led_status to invalid value")
         led_data = {"enable": status}
         response = self.post(SET_LED, led_data)
+        return response.json()
 
     #### WiFi ####
 
